@@ -1,9 +1,9 @@
-import "../App.css";
-export const Modal = ({ isModalShown, onRequestClose, children }) => {
+import "../App.scss";
+
+export const Modal = ({ isModalShown, onRequestClose, classes, children }) => {
   return isModalShown ? (
-    <div className="modal" onClick={onRequestClose}>
+    <div className={classes} onClick={onRequestClose}>
       <div
-        className="modal-container"
         onClick={(e) => {
           e.stopPropagation();
         }}

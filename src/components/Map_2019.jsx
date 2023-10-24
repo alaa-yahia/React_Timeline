@@ -1,7 +1,56 @@
 import { useState } from "react";
+import { Modal } from "./Modal";
+import AwesomeSlider from "react-awesome-slider";
+import "react-awesome-slider/dist/styles.css";
+import "react-awesome-slider/dist/custom-animations/cube-animation.css";
+import "../App.scss";
+
+const data1 = [
+  {
+    id: "1",
+    title: "Cat 1",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    img: "src/assets/photo-1583083527882-4bee9aba2eea.avif",
+  },
+  {
+    id: "2",
+    title: "Cat 2",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+    img: "src/assets/photo-1571988840298-3b5301d5109b.avif",
+  },
+  {
+    id: "3",
+    title: "Cat 3",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    img: "src/assets/photo-1608848461950-0fe51dfc41cb.avif",
+  },
+];
+
+const data2 = [
+  {
+    id: "1",
+    title: "Flower 1",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+    img: "src/assets/vibrant-pink-and-white-summer-flowering-cosmos-royalty-free-image-1653499726.jpg",
+  },
+  {
+    id: "2",
+    title: "Flower 2",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    img: "src/assets/cdn.cliqueinc.com__cache__posts__253245__most-beautiful-flowers-253245-1522430144413-main.700x0c-54d089becbe64976827e9ed0461e3f24.jpg",
+  },
+  {
+    id: "3",
+    title: "Flower 3",
+    desc: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    img: "src/assets/close-up-of-purple-crocus-flowers-united-kingdom-uk-royalty-free-image-1674159456.jpg",
+  },
+];
 
 const Map_2019 = () => {
   const [isHovering, setIsHovering] = useState(false);
+  const [isModalShown, setIsModalShown] = useState(false);
+  const [data, setData] = useState(data1);
 
   const handleMouseEnter = () => {
     setIsHovering(true);
@@ -251,7 +300,8 @@ const Map_2019 = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
               onClick={() => {
-                console.log("po");
+                setIsModalShown(true);
+                setData(data1);
               }}
             />
             <path
@@ -275,6 +325,10 @@ const Map_2019 = () => {
               fillOpacity={1}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onClick={() => {
+                setIsModalShown(true);
+                setData(data2);
+              }}
             />
             <path
               fill="#88a4bc"
@@ -516,6 +570,21 @@ const Map_2019 = () => {
         </div>
         <div id="map_legend" style={{ position: "absolute", zIndex: 1 }} />
       </div>
+      <Modal
+        isModalShown={isModalShown}
+        onRequestClose={() => setIsModalShown(!isModalShown)}
+        classes="modal-container_center"
+      >
+        <AwesomeSlider>
+          {data.map((d) => (
+            <div className="item" style={{ color: "white" }}>
+              <h2>{d.title}</h2>
+              <img src={d.img} style={{ width: "30%", height: "30%" }} />
+              <p>{d.desc} </p>
+            </div>
+          ))}
+        </AwesomeSlider>
+      </Modal>
     </div>
   );
 };
