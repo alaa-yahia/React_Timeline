@@ -39,10 +39,7 @@ function App() {
           2021
         </li>
       </ul>
-      {/*  <Helmet>
-        <script type="text/javascript" src="mapdata.js"></script>
-        <script type="text/javascript" src="countrymap.js"></script>
-      </Helmet> */}
+
       <Modal
         isModalShown={isModalShown}
         onRequestClose={() => setIsModalShown(!isModalShown)}
@@ -53,6 +50,5 @@ function App() {
     </>
   );
 }
-("use strict");
 
 export default App;
